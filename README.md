@@ -6,3 +6,45 @@
 <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFit"></image>
 ``` 
 3. index.js里面的getUserInfo方法和系统方法重名，改为onGetUserInfo
+4. sitmap.json可配置页面是否被索引，搜索时是否被微信爬虫爬到页面
+
+    4.1 默认为allow，*所有页面都可以被索引
+      ```json
+      "rules": [
+          {
+            "action": "allow",
+            "page": "*"
+          }
+        ]
+      ```
+
+    4.2 某个页面不被索引
+      ```json
+      "rules": [
+          {
+            "action": "disallow",
+            "page": "pages/logs/logs"
+          },
+          {
+            "action": "allow",
+            "page": "*"
+          }
+        ]
+      ```
+
+    4.3 同时包含a，b两个参数的页面会被索引，其他不会
+      ```json
+      "rules": [
+          {
+            "action": "allow",
+            "page": "path/to/page",
+            "params": ["a", "b"],
+            "matching": "inclusive"
+          }, 
+          {
+            "action": "disallow",
+            "page": "*"
+          }
+        ]
+      ```
+5. logs.wxml页面报错Now you can provide attr `wx:key` for a `wx:for` to improve performance.
