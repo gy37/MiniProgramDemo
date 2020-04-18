@@ -1,0 +1,10 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex; /*弹性布局*/
+  flex-direction: column; /*指定布局方向，确定主轴和交叉轴*/
+  align-items: center; /*定义item在交叉轴上的对齐方式*/
+  justify-content: space-between; /*定义item在主轴上的对齐方式，space-between中间添加空白*/
+  padding: 200rpx 0; /*内部边距；responsive pixel，可根据屏幕宽度自适应，屏幕宽度为750rpx*/
+  box-sizing: border-box; /*盒子模型width=content+padding+border；默认content-box标准盒子模型，设置宽度500px，则content=500px；border-box怪异盒子模型，设置宽度500px，则width=500px*/
+} 
