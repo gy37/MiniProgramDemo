@@ -6,9 +6,8 @@
 <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFit"></image>
 ``` 
 3. index.js里面的getUserInfo方法和系统方法重名，改为onGetUserInfo
-4. sitmap.json可配置页面是否被索引，搜索时是否被微信爬虫爬到页面
-
-    4.1 默认为allow，*所有页面都可以被索引
+4. sitmap.json可配置页面是否被索引，搜索时是否被微信爬虫爬到页面   
+    (1) 默认为allow，*所有页面都可以被索引
       ```json
       "rules": [
           {
@@ -17,8 +16,7 @@
           }
         ]
       ```
-
-    4.2 某个页面不被索引
+    (2) 某个页面不被索引
       ```json
       "rules": [
           {
@@ -31,8 +29,7 @@
           }
         ]
       ```
-
-    4.3 同时包含a，b两个参数的页面会被索引，其他不会
+    (3) 同时包含a，b两个参数的页面会被索引，其他不会
       ```json
       "rules": [
           {
@@ -47,4 +44,8 @@
           }
         ]
       ```
-5. logs.wxml页面报错Now you can provide attr `wx:key` for a `wx:for` to improve performance.
+5. logs.wxml页面报错Now you can provide attr `wx:key` for a `wx:for` to improve performance.   
+  wx:key用于标识每个item,   
+  当数据改变触发渲染层重新渲染时，会校正带有key的组件，会重新排序而不是重新创建，提高渲染效率,   
+  在wx:for和wx:for-item之间加wx:key，设置为index即可消除警告
+6. 开发工具中Side Bar里面push代码会一直等待，push不成功，使用Tool Bar里面的Source Control可以
