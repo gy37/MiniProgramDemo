@@ -47,5 +47,6 @@
 5. logs.wxml页面报错Now you can provide attr `wx:key` for a `wx:for` to improve performance.   
   wx:key用于标识每个item,   
   当数据改变触发渲染层重新渲染时，会校正带有key的组件，会重新排序而不是重新创建，提高渲染效率,   
-  在wx:for和wx:for-item之间加wx:key，设置为index即可消除警告
+  在wx:for和wx:for-item之间加wx:key，值设置为*this代表当前item自身即可
 6. 开发工具中Side Bar里面push代码会一直等待，push不成功，使用Tool Bar里面的Source Control可以
+7. [微信开放文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/)和[小程序开发指南](https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0008aeea9a8978ab0086a685851c0a)，虽然有些东西是重复的，但是建议还是都看一遍

@@ -1,5 +1,5 @@
 //logs.js
-const util = require('../../utils/util.js')
+const util = require('../../utils/util.js')//使用require(path)引入其他模块
 
 Page({
   data: {

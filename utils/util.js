@@ -14,6 +14,6 @@ const formatNumber = n => {//格式化日期时间数字，一位数前面加'0'
   return n[1] ? n : '0' + n
 }
 
-module.exports = {
+module.exports = {//使用module.exports暴露接口供其它模块调用
   formatTime: formatTime
 }
