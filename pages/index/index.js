@@ -11,7 +11,7 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    wx.navigateTo({
+    wx.navigateTo({//nevigateTo和redirectTo方法的url中可以拼接参数，实现页面传参
       url: '../logs/logs'
     })
   },
@@ -42,6 +42,18 @@ Page({
         }
       })
     }
+  },
+  onShow: function() {
+
+  },
+  onReady: function() {
+
+  },
+  onHide: function() {
+
+  },
+  onUnload: function() {
+
   },
   // 点击获取用户信息按钮成功回调，detail中包含用户信息
   onGetUserInfo: function(e) {

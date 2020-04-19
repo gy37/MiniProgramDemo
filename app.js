@@ -34,6 +34,12 @@ App({
       }
     })
   },
+  onShow: function(options) {
+    console.log(options);
+  },
+  onHide: function() {
+
+  },
   globalData: {
     userInfo: null
   }
