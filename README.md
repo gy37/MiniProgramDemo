@@ -56,9 +56,10 @@
   [comment]:#markdown参考链接和正文之间要加空行
   [documents]: https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/
   [guideline]: https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0008aeea9a8978ab0086a685851c0a
+
 8. 生命周期    
   App生命周期onLaunch-onShow-onHide   
-  Page生命周期onLoad-onShow-onReady-onHide-OnUnload
+  Page生命周期onLoad-onShow-onReady-onHide-OnUnload   
 9. 事件对象   
   target和currentTarget的区别，currentTarget为当前事件所绑定的组件，而target则是触发该事件的源头组件      
-  target的dataset属性是当前组件上由data-开头的自定义属性组成的集合
+  target的dataset属性是当前组件上由data-开头的自定义属性组成的集合   
