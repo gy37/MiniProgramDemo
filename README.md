@@ -49,4 +49,16 @@
   当数据改变触发渲染层重新渲染时，会校正带有key的组件，会重新排序而不是重新创建，提高渲染效率,   
   在wx:for和wx:for-item之间加wx:key，值设置为*this代表当前item自身即可
 6. 开发工具中Side Bar里面push代码会一直等待，push不成功，使用Tool Bar里面的Source Control可以
-7. [微信开放文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/)和[小程序开发指南](https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0008aeea9a8978ab0086a685851c0a)，虽然有些东西是重复的，但是建议还是都看一遍
+7. [微信开放文档][documents]和[小程序开发指南][guideline]，虽然有些东西是重复的，但是建议还是都看一遍。   
+  原来[小程序开发指南][guideline]是一本书，详细介绍如何进行小程序开发，按顺序应该先看一遍[微信开放文档][documents]的指南部分，然后再来详细看一遍这本书。
+
+  [comment]:#markdown添加注释语法[comment]：空格#
+  [comment]:#markdown参考链接和正文之间要加空行
+  [documents]: https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/
+  [guideline]: https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0008aeea9a8978ab0086a685851c0a
+8. 生命周期    
+  App生命周期onLaunch-onShow-onHide   
+  Page生命周期onLoad-onShow-onReady-onHide-OnUnload
+9. 事件对象   
+  target和currentTarget的区别，currentTarget为当前事件所绑定的组件，而target则是触发该事件的源头组件      
+  target的dataset属性是当前组件上由data-开头的自定义属性组成的集合
