@@ -44,8 +44,8 @@
           }
         ]
       ```
-5. logs.wxml页面报错 `Now you can provide attr wx:key for a wx:for to improve performance.`   
-  wx:key用于标识每个item,   
+5. logs.wxml页面报错 `Now you can provide attr wx:key for a wx:for to improve performance.`  
+  `wx:key`用于标识每个item,   
   当数据改变触发渲染层重新渲染时，会校正带有`key`的组件，会重新排序而不是重新创建，提高渲染效率,   
   在`wx:for`和`wx:for-item`之间加`wx:key`，值设置为`*this`代表当前item自身即可
 6. 开发工具中`Side Bar`里面push代码会一直等待，push不成功，使用`Tool Bar`里面的`Source Control`可以
@@ -55,6 +55,7 @@
   [comment]: #markdown添加注释语法[comment]:空格#
   [comment]: #markdown行内代码用两个``包裹
   [comment]: #markdown参考链接和正文之间要加空行
+  [comment]: 手动安装sublime的markdown插件OmniMarkupPreviewer时，需要修改下载的OmniMarkupPreviewer文件名，去掉-master
   [documents]: https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/
   [guideline]: https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0008aeea9a8978ab0086a685851c0a
 
@@ -64,3 +65,5 @@
 9. 事件对象   
   `target`和`currentTarget`的区别，`currentTarget`为当前事件所绑定的组件，而`target`则是触发该事件的源头组件      
   `target`的`dataset`属性是当前组件上由`data-`开头的自定义属性组成的集合   
+10. 事件   
+  捕获阶段位于冒泡阶段之前，且在捕获阶段中，事件到达节点的顺序与冒泡阶段恰好相反。
