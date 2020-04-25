@@ -58,12 +58,3 @@
   [comment]: 手动安装sublime的markdown插件OmniMarkupPreviewer时，需要修改下载的OmniMarkupPreviewer文件名，去掉-master；详情见博客https://www.cnblogs.com/shenyuiOS/p/12771250.html
   [documents]: https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/
   [guideline]: https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0008aeea9a8978ab0086a685851c0a
-
-8. 生命周期    
-  App生命周期 `onLaunch`-`onShow`-`onHide `  
-  Page生命周期 `onLoad`-`onShow`-`onReady`-`onHide`-`OnUnload`   
-9. 事件对象   
-  `target`和`currentTarget`的区别，`currentTarget`为当前事件所绑定的组件，而`target`则是触发该事件的源头组件      
-  `target`的`dataset`属性是当前组件上由`data-`开头的自定义属性组成的集合   
-10. 事件   
-  捕获阶段位于冒泡阶段之前，且在捕获阶段中，事件到达节点的顺序与冒泡阶段恰好相反。
