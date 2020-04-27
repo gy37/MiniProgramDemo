@@ -55,6 +55,7 @@
   [comment]: #markdown添加注释语法[comment]:空格#
   [comment]: #markdown行内代码用两个``包裹
   [comment]: #markdown参考链接和正文之间要加空行
-  [comment]: 手动安装sublime的markdown插件OmniMarkupPreviewer时，需要修改下载的OmniMarkupPreviewer文件名，去掉-master；详情见博客https://www.cnblogs.com/shenyuiOS/p/12771250.html
+  [comment]: #手动安装sublime的markdown插件OmniMarkupPreviewer时，需要修改下载的OmniMarkupPreviewer文件名，去掉-master；详情见博客https://www.cnblogs.com/shenyuiOS/p/12771250.html
+  [comment]: #列表项中添加代码，前面加两个Tab
   [documents]: https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/
   [guideline]: https://developers.weixin.qq.com/ebook?action=get_post_info&docid=0008aeea9a8978ab0086a685851c0a

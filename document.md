@@ -6,8 +6,35 @@
 5. [指南-小程序框架-视图层-简易双向绑定中的示例](https://developers.weixin.qq.com/s/8jXvobmV7vcj)
 6. [指南-小程序框架-视图层-动画中的示例1](https://developers.weixin.qq.com/s/oHKxDPm47h5k)
 7. [指南-小程序框架-视图层-动画中的示例2](https://developers.weixin.qq.com/s/P73kJ7mi7UcA)
-8. [指南-小程序框架-视图层-动画中的示例3](https://developers.weixin.qq.com/s/994o8jmY7FcQ)
-9. [指南-小程序框架-视图层-动画中的示例4](https://developers.weixin.qq.com/s/cRTvdPmO7d5T)
+8. [指南-小程序框架-视图层-动画中的示例3](https://developers.weixin.qq.com/s/994o8jmY7FcQ)   
+    (1)设置控件居中，需要设置父控件的css样式
+      ```css
+      view {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      ```
+9. [指南-小程序框架-视图层-动画中的示例4](https://developers.weixin.qq.com/s/cRTvdPmO7d5T)   
+    (1) `js`格式化数字，前面补零
+      ```javascript
+      formatNumber: function(num, n) {
+          var len = num.toString().length;
+          while(len < n) {
+              num = "0" + num;
+              len++;
+          }
+          return num;
+        }
+      ```
+    (2) 小程序的方法调用需要`this.`+`方法名`
+      ```javascript
+      this.formatNumber(12, 3);//调用方法，this.方法名
+      ```
+    (3) 在方法内部的其他方法中使用`this`时，需要先保存一下`this`
+      ```javascript
+      var that = this //在方法内部的其他方法中使用this时，需要先保存一下this
+      ```
 
 ### 开放文档笔记
 
