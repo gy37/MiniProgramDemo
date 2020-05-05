@@ -10,18 +10,17 @@
     (1) 设置控件居中，需要设置父控件的css样式
       ```css
       view {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: flex;/*flex弹性布局*/
+        align-items: center;/*item在交叉轴上的对齐方式*/
+        justify-content: center;/*item在主轴上的对齐方式*/
       }
       ```
-    (2) **#scroller**：[scroll-view](https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html)   
+    (2) **#scroller**：[scroll-view](https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html)，整个scroll-view   
     * `scroll-y`：y方向滚动；   
     * `throttle`：不清楚，查了文档`scroll-view`没有这个属性；   
     * `data-status-bar-height`：将数据绑定到组件，事件触发时，在`target`的`dataset`对象中可以获取到转换后的属性`statusBarHeight`；   
 
-    (3) **.nav**：[view](https://developers.weixin.qq.com/miniprogram/dev/component/view.html#view)   
-    * style行内样式设置`padding-top`，不推荐使用行内样式；   
+    (3) **.nav**：[view](https://developers.weixin.qq.com/miniprogram/dev/component/view.html#view)，导航栏区域；通过style行内样式设置`padding-top`，不推荐使用行内样式；
     * wxcss文件中的`.nav`样式：
       ```css
       .nav {
@@ -35,8 +34,8 @@
       }
       ```
     * [open-data](https://developers.weixin.qq.com/miniprogram/dev/component/open-data.html) 用于展示微信开放的数据。`userNickName`获取用户昵称；`userAvatarUrl`获取用户头像；`userProvince`获取用户省份；`userCity`获取用户城市；
-    * `.search_bar`: style行内样式设置`top`属性；因为`.search_bar`的`position`属性值为`absolute`，相对于有`position`属性的父元素定位，即为相对于`.nav`进行定位，距离它的顶部20px。
-    * `.search_input`样式：
+    * `.search_bar`搜索框: style行内样式设置`top`属性；因为`.search_bar`的`position`属性值为`absolute`，相对于有`position`属性的父元素定位，即为相对于`.nav`进行定位，距离它的顶部20px。
+    * `.search_input`，输入框的样式：
       ```css
       .search_input { 
         text-align: left;
@@ -51,7 +50,7 @@
         overflow: hidden;/*超过部分隐藏*/
       }
       ```
-    * `.search_input text`：[text](https://developers.weixin.qq.com/miniprogram/dev/component/text.html#text)样式：
+    * `.search_input text`：[text](https://developers.weixin.qq.com/miniprogram/dev/component/text.html#text)，输入框中的文本样式：
       ```css
       .search_input text {
         padding-left: 20px;/*内左边距，预留icon位置*/
@@ -60,12 +59,92 @@
         height: 25px;
       }
       ```
-    * `.search_bar icon`: [icon](https://developers.weixin.qq.com/miniprogram/dev/component/icon.html#icon)，微信提供的一些默认图标
+    * `.search_bar icon`: [icon](https://developers.weixin.qq.com/miniprogram/dev/component/icon.html#icon)，微信提供的一些默认图标   
 
+    (4) **.info**内容区域 
+    * `.info`的样式：
+      ```css
+      .info {
+        margin-top: env(safe-area-inset-top);/*外上边距，预留状态栏高度*/
+        padding-top: 44px;/*内上边距，预留nav高度*/
+        /* display: flex; */
+        background-color: white;
+      }
+      ```
+    * `.avatar`头像，行内样式`top: {{((statusBarHeight + 44) - 80) - 5}}px`，设置top为-21px和sticky一起使用当头像位置超过父元素（此处为scroll-view）21px之后固定；css文件中的样式为：
+      ```css
+      .avatar {
+        /* display: inline-block; */
+        display: flex;
+        border-radius: 100%;
+        border: 2px solid #FAFAFA;
+        height: 100px;
+        width: 100px;
+        overflow: hidden;
+        /* position: absolute; */
+        left: 20px;
+        /* top: 10px; */
+        will-change: transform;/*提前告知浏览器该元素要进行transform动画，避免开始动画时闪屏*/
+        /* transition: transform .03s linear; */
+        z-index: 2;/*在导航栏图层上面*/
+        /* contain: strict; */
+        position: sticky;/*粘性定位，主要用在scroll-view中，相对于最近的scroll-box类型（含有滚动条或者设置了overflow属性）的父元素进行定位，当超过了设置的top/right/bottom/left的值时会固定*/
+        /* top: -20px; */
+        transform: translateY(-20px);/*通过transform属性对元素进行旋转，缩放，倾斜，平移等操作，顺序为rotate, scale, skew, translate*/
+        transform-origin: left 75%;/*元素transform动画的原点，相对于元素左上角的距离，默认为自身中心点*/
+      }
+      ```
+    * `.intro`简介，`bindtap`绑定点击事件
+    * `.scroller2`: [scroll-view](https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html)，页面中间的scroll-view；`scroll-x`设置滚动方向为横向滚动；`bindscroll`绑定滚动事件；`bindtouchend`绑定触摸结束事件；`scroll-with-animation`设置滚动条位置时是否使用动画；`scroll-left`设置横向滚动条的位置；
+    * `menu_wrap`，scroll-view下的子控件，设置足够的宽度来显示内容；样式为：
+      ```css
+      .menu_wrap {
+        white-space: nowrap;/*所有内容显示在一行，不换行*/
+        padding: 9px 0;
+        position: relative;
+      }
+      ```
+    * `.menu_item_more`查看更多按钮，通过滚动动画控制是否显示；
+
+    (5) **js内容**
+    * `scrollLeft`和`scrollTop`属性，该元素显示内容与实际内容的距离，或者说向左或向上滚动的距离
+    * `scrollWidth`和`scrollHeight`属性，该元素内容的实际宽度和高度
+    * `deltaX`和`deltaY`属性，向右和向上滚动时返回正值，向左和向下滚动时返回负值
+    * `createSelectorQuery()`创建选择器，用于选取指定元素
+    * `select()`指定选择器，选取第一个匹配到的元素
+    * [`fields(Object, Function)`](https://developers.weixin.qq.com/miniprogram/dev/api/wxml/NodesRef.fields.html)获取节点信息，Object中指定需要返回哪些节点信息，Function回调方法，里面有需要的节点信息
+    * [`this.animate(selector, keyframes, duration, callback)`](https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html#%E5%85%B3%E9%94%AE%E5%B8%A7%E5%8A%A8%E7%94%BB)关键帧动画
+    * [`this.animate(selector, keyframes, duration, ScrollTimeline)`](https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html#%E6%BB%9A%E5%8A%A8%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8A%A8%E7%94%BB)滚动驱动的动画，示例：
+      ```js
+      //this.animate(selector, keyframes, duration, ScrollTimeline)滚动驱动的动画
+      this.animate('.avatar', [{
+        borderRadius: '0',
+        borderColor: 'red',
+        transform: 'scale(1) translateY(-25px)',
+        offset: 0,//offset关键帧的偏移，范围【0，1】标识开始和结束帧
+      }, {
+        borderRadius: '25%',
+        borderColor: 'green',
+        transform: 'scale(.65) translateY(-25px)',
+        offset: .4,
+      }, {
+        borderRadius: '50%',
+        borderColor: 'blue',
+        transform: `scale(.3) translateY(-20px)`,
+        offset: 1
+      }], 2000, {
+        scrollSource: '#scroller',//滚动元素
+        timeRange: 2000,//时间
+        startScrollOffset: 0,//开始滚动动画的位置
+        endScrollOffset: 85,//结束滚动动画的位置
+      })
+      ```
+
+    
       
 9. [指南-小程序框架-视图层-动画中的示例4](https://developers.weixin.qq.com/s/cRTvdPmO7d5T)   
     (1) `js`格式化数字，前面补零
-      ```javascript
+      ```js
       formatNumber: function(num, n) {
           var len = num.toString().length;
           while(len < n) {
@@ -76,11 +155,11 @@
         }
       ```
     (2) 小程序的方法调用需要`this.`+`方法名`
-      ```javascript
+      ```js
       this.formatNumber(12, 3);//调用方法，this.方法名
       ```
     (3) 在方法内部的其他方法中使用`this`时，需要先保存一下`this`
-      ```javascript
+      ```js
       var that = this //在方法内部的其他方法中使用this时，需要先保存一下this
       ```
 
