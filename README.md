@@ -1,10 +1,10 @@
 ### 项目配置及修改项
 1. 使用开发工具push代码，需要在`Source Control-Setting-Network and Auth`的Auth部分选择`Use username and password`,并输入用户和密码
 2. index.wxml代码中的`mode`为`cover`？搜索之后说是遗留代码问题，不过现在还没改过来
-```js
-//aspectFit
-<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFit"></image>
-``` 
+    ```js
+    //aspectFit
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFit"></image>
+    ``` 
 3. index.js里面的`getUserInfo`方法和系统方法重名，改为`onGetUserInfo`
 4. sitmap.json可配置页面是否被索引，搜索时是否被微信爬虫爬到页面   
     (1) 默认为`allow，*`所有页面都可以被索引

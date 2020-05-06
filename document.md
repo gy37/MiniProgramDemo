@@ -5,7 +5,36 @@
 4. [指南-小程序框架-视图层-事件系统-WXS响应事件中的示例](https://developers.weixin.qq.com/s/L1G0Dkmc7G8a)
 5. [指南-小程序框架-视图层-简易双向绑定中的示例](https://developers.weixin.qq.com/s/8jXvobmV7vcj)
 6. [指南-小程序框架-视图层-动画中的示例1](https://developers.weixin.qq.com/s/oHKxDPm47h5k)
-7. [指南-小程序框架-视图层-动画中的示例2](https://developers.weixin.qq.com/s/P73kJ7mi7UcA)
+7. [指南-小程序框架-视图层-动画中的示例2](https://developers.weixin.qq.com/s/P73kJ7mi7UcA)   
+    (1) [`this.animate(selector, keyframes, duration, callback)`](https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html#%E5%85%B3%E9%94%AE%E5%B8%A7%E5%8A%A8%E7%94%BB)关键帧动画，示例：
+      ```js
+      this.animate('#container', [//父视图进行动画时，子视图也会跟随进行相应属性的改变，例如下面两个动画完成时，container转动90度，而block会转动180度
+        { opacity: 0.9, rotate: 0, backgroundColor: '#FF0000' },
+        { opacity: 0.6, rotate: 45, backgroundColor: '#00FF00' },
+        { opacity: 0.3, rotate: 90, backgroundColor: '#0000FF' },
+      ], 5000)
+      this.animate('.block', [
+        { scale: [1, 1], rotate: 0, ease: 'ease-out' },//ease设置动画速度,ease-in开始慢结束快，ease-out开始快结束慢
+        { scale: [1.5, 1], rotate: 45, ease: 'ease-in'},//scale两个参数分别为x方向和y方向的缩放值
+        { scale: [2, 1], rotate: 90 },
+      ], 5000)
+      ```
+    (2) 带回调的关键帧动画，示例：
+      ```js
+      var that = this
+      this.animate('#container1', [
+        { opacity: 1.0, rotate: 0, backgroundColor: '#FF0000' },
+        { opacity: 0.5, rotate: 45, backgroundColor: '#00FF00', offset: 0.9},//offset指定帧动画的位置，取值【0，1】
+        { opacity: 0.0, rotate: 90, backgroundColor: '#FF0000' },
+        ], 5000, function () {//动画执行完成后的回调
+          that.clearAnimation('#container1', { opacity: true, rotate: true }, function () {
+            console.log("清除了#container上的动画属性")
+          })
+      })
+      ```
+      * 动画完成会改变控件属性，需要用`this.clearAnimation(selector, options, callback)`来清理动画的影响
+      * 原工程中使用`bind(this)`来在回调函数中使用`this`，这样不太好，改用`that`
+      * 不同的动画方法像是异步执行的，不会互相阻塞
 8. [指南-小程序框架-视图层-动画中的示例3](https://developers.weixin.qq.com/s/994o8jmY7FcQ)   
     (1) 设置控件居中，需要设置父控件的css样式
       ```css
