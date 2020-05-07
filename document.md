@@ -4,7 +4,37 @@
 3. [指南-小程序框架-视图层-事件系统中的示例](https://developers.weixin.qq.com/s/boDQoKmu7M7G)
 4. [指南-小程序框架-视图层-事件系统-WXS响应事件中的示例](https://developers.weixin.qq.com/s/L1G0Dkmc7G8a)
 5. [指南-小程序框架-视图层-简易双向绑定中的示例](https://developers.weixin.qq.com/s/8jXvobmV7vcj)
-6. [指南-小程序框架-视图层-动画中的示例1](https://developers.weixin.qq.com/s/oHKxDPm47h5k)
+6. [指南-小程序框架-视图层-动画中的示例1](https://developers.weixin.qq.com/s/oHKxDPm47h5k)   
+    (1) [界面动画的常见方式](https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html#%E7%95%8C%E9%9D%A2%E5%8A%A8%E7%94%BB%E7%9A%84%E5%B8%B8%E8%A7%81%E6%96%B9%E5%BC%8F)，示例中进行渐变和动画的view：
+      ```html
+      <view class="box {{extraClasses}}"
+        bindtransitionend="transitionEnd"
+        bindanimationstart="animationStart"
+        bindanimationiteration="animationIteration"
+      ></view>
+      ```
+      * `class="box {{extraClasses}}"`设置`view`的`class`，其中`extraClasses`是js中定义的，可以动态设置
+      * `bindtransitionend`渐变结束时触发事件；`bindanimationstart`动画开始时的事件；`bindanimationiteration`动画结束一个阶段（完成一次属性值的变化）时的事件；`bindanimationend`动画结束时的事件;   
+
+    (2) 示例中的`transition`动画：
+      ```css
+      .box-transition {
+        transition: all 0.5s;/*所有属性都进行渐变，渐变动画进行0.5s*/
+      }
+      ```
+      * `transition: property duration timing-function delay;`过渡动画的四个参数分别为：进行过渡动画的属性；过渡动画时间；过渡动画速度；过渡动画延时多久开始；默认值为all, 0, ease, 0；必须设置duration，否则没有渐变效果；
+
+    (3) 示例中的`animation`动画：
+      ```css
+      @keyframes box-ani {/*指定帧动画*/
+        from {margin-left: 60rpx}/*开始属性值*/
+        to {margin-left: 590rpx}/*结束属性值*/
+      }
+      .box-animation {
+        animation: box-ani 1s alternate infinite;/*动画名称，动画时长，偶数次反向播放，播放无限次*/
+      }
+      ```
+      * `animation: name duration timing-function delay iteration-count direction;`动画参数分别为：绑定到选择器的关键帧动画名称，动画时长，动画速度，动画延时，动画播放次数，动画方向；默认值为none, 0, ease, 0, 1, normal/alternate；必须设置duration，否则没有动画效果；
 7. [指南-小程序框架-视图层-动画中的示例2](https://developers.weixin.qq.com/s/P73kJ7mi7UcA)   
     (1) [`this.animate(selector, keyframes, duration, callback)`](https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html#%E5%85%B3%E9%94%AE%E5%B8%A7%E5%8A%A8%E7%94%BB)关键帧动画，示例：
       ```js
