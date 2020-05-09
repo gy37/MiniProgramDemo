@@ -3,7 +3,62 @@
 2. [指南-小程序框架中的示例](https://developers.weixin.qq.com/s/l0gLEKmv6gZa)
 3. [指南-小程序框架-视图层-事件系统中的示例](https://developers.weixin.qq.com/s/boDQoKmu7M7G)
 4. [指南-小程序框架-视图层-事件系统-WXS响应事件中的示例](https://developers.weixin.qq.com/s/L1G0Dkmc7G8a)
-5. [指南-小程序框架-视图层-简易双向绑定中的示例](https://developers.weixin.qq.com/s/8jXvobmV7vcj)
+5. [指南-小程序框架-视图层-简易双向绑定中的示例](https://developers.weixin.qq.com/s/8jXvobmV7vcj)   
+    (1) [简易双向绑定](https://developers.weixin.qq.com/miniprogram/dev/framework/view/two-way-bindings.html)，示例：
+      ```html
+      <input model:value="{{value}}" />
+      ```
+      * 使用`model:`前缀，实现简易双向绑定，页面数据改变时，`data`中的数据也会同时改变
+
+    (2) 直接运行示例代码，改变输入框内容，底部显示的内容没有改变，以为是什么bug。查了[微信开发社区](https://developers.weixin.qq.com/community/develop/mixflow)后，才知道简易双向绑定基础库版本`2.9.3 `之后才能使用。   
+    (3) 点击编译器右上角的`Details`按钮，点`Local Settings`，点击`Debug Base Library`右边的下拉框，选择最高级的版本，在编译，即可正常体验小程序中的数据双向绑定。   
+    (4) [`swiper`](https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html#swiper)滑动视图容器，示例：
+      ```html
+      <!-- current当前所在滑块的index，model：绑定current和currentSwiperItem，他们的值会同时改变 -->
+      <swiper class="swiper" model:current="{{ currentSwiperItem }}" indicator-dots="true" indicator-color="gray" indicator-active-color="red" autoplay="true" interval="2000"  duration="1000">
+        <swiper-item class="center">swiper 的第 1 页</swiper-item>
+        <swiper-item class="center">swiper 的第 2 页</swiper-item>
+        <swiper-item class="center">swiper 的第 3 页</swiper-item>
+      </swiper>
+      ```
+    (5) `another_comp.js`源码：
+      ```js
+      // index/another_comp.js
+      //双向绑定数据流向：从内到外，scroll-view滚动时，调用绑定的滚动方法回调onScroll，在onScroll中设置scrollTop变量的值
+      //从外到内，当scrollTop变量的值变化时，observers中的监听方法会被调用，在里面设置innerScrollTop的值为scrollTop变量的值，当innerScrollTop变化时，因为scroll-view的scroll-top绑定的是innerScrollTop变量的值，所以scroll-view会滚动到指定位置
+      Component({
+        properties: {
+          scrollTop: Number
+        },
+        data: {
+          list: 10,
+          innerScrollTop: 0,
+        },
+        observers: {
+          scrollTop: function(scrollTop) {//监听scrollTop变量值变化
+            // control the updating frequency
+            if (this._scrollTopUpdateScheduled) {//如果有定时器
+              clearTimeout(this._scrollTopUpdateScheduled)//清空定时器，如果不清空会导致死循环，滚动的停不下来，hhh
+            }
+            this._scrollTopUpdateScheduled = setTimeout(() => {//开启新的定时器，250ms后设置innerScrollTop的值
+              console.log("setTimeout callback invoked");
+              this.setData({//把scrollTop变量的值复制给innerScrollTop变量
+                innerScrollTop: scrollTop
+              })
+            }, 250)//250ms之后执行回调函数
+            console.log("scrollTop value changed");
+          }
+        },
+        methods: {
+          onScroll: function(e) {//滚动时，调用绑定的方法
+            this.setData({
+              scrollTop: e.detail.scrollTop//获取滚动时的位置，设置给scrollTop变量
+            })
+          }
+        },
+      })
+      ```
+
 6. [指南-小程序框架-视图层-动画中的示例1](https://developers.weixin.qq.com/s/oHKxDPm47h5k)   
     (1) [界面动画的常见方式](https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html#%E7%95%8C%E9%9D%A2%E5%8A%A8%E7%94%BB%E7%9A%84%E5%B8%B8%E8%A7%81%E6%96%B9%E5%BC%8F)，示例中进行渐变和动画的view：
       ```html
