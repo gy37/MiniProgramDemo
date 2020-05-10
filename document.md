@@ -1,8 +1,14 @@
 ### 开放文档中的示例
 1. [指南-起步-小程序简介中的示例](https://github.com/wechat-miniprogram/miniprogram-demo)
 2. [指南-小程序框架中的示例](https://developers.weixin.qq.com/s/l0gLEKmv6gZa)
-3. [指南-小程序框架-视图层-事件系统中的示例](https://developers.weixin.qq.com/s/boDQoKmu7M7G)
+//数据绑定示例
+3. [指南-小程序框架-视图层-事件系统中的示例](https://developers.weixin.qq.com/s/boDQoKmu7M7G)   
+    (1) [小程序事件中的mark部分](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html#mark)，这个示例还是不能直接运行，因为`mark`需要在2.7.1以上才能使用，所以需要设置基础库版本大于2.7.1才行
+    (2) 当事件触发时，事件冒泡路径上所有的`mark` 会被合并，并返回给事件回调函数。   
+    (3) `mark`类似`dataset`，是组件上绑定的数据，`dataset`会自动去除组件绑定属性的`data-`前缀，并且把变量进行大小写转换，而`mark`不会   
+    (4) `mark`会包含从触发事件的节点到根节点上所有的`mark`属性值，而`dataset`仅包含一个节点的`data-`属性值
 4. [指南-小程序框架-视图层-事件系统-WXS响应事件中的示例](https://developers.weixin.qq.com/s/L1G0Dkmc7G8a)
+//InteractiveAnimation
 5. [指南-小程序框架-视图层-简易双向绑定中的示例](https://developers.weixin.qq.com/s/8jXvobmV7vcj)   
     (1) [简易双向绑定](https://developers.weixin.qq.com/miniprogram/dev/framework/view/two-way-bindings.html)，示例：
       ```html
