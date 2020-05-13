@@ -1,14 +1,58 @@
 ### 开放文档中的示例
 1. [指南-起步-小程序简介中的示例](https://github.com/wechat-miniprogram/miniprogram-demo)
+    
+    --- 
 2. [指南-小程序框架中的示例](https://developers.weixin.qq.com/s/l0gLEKmv6gZa)
 //数据绑定示例
+    
+    --- 
 3. [指南-小程序框架-视图层-事件系统中的示例](https://developers.weixin.qq.com/s/boDQoKmu7M7G)   
     (1) [小程序事件中的mark部分](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html#mark)，这个示例还是不能直接运行，因为`mark`需要在2.7.1以上才能使用，所以需要设置基础库版本大于2.7.1才行
     (2) 当事件触发时，事件冒泡路径上所有的`mark` 会被合并，并返回给事件回调函数。   
     (3) `mark`类似`dataset`，是组件上绑定的数据，`dataset`会自动去除组件绑定属性的`data-`前缀，并且把变量进行大小写转换，而`mark`不会   
     (4) `mark`会包含从触发事件的节点到根节点上所有的`mark`属性值，而`dataset`仅包含一个节点的`data-`属性值
-4. [指南-小程序框架-视图层-事件系统-WXS响应事件中的示例](https://developers.weixin.qq.com/s/L1G0Dkmc7G8a)
-//InteractiveAnimation
+    
+    --- 
+4. [指南-小程序框架-视图层-事件系统-WXS响应事件中的示例](https://developers.weixin.qq.com/s/L1G0Dkmc7G8a)   
+    (1) `index`页面，主页包括四个[`navigator`页面链接](https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html)，点击即可跳转到指定的页面   
+    (2) [`wxs`文件介绍](https://developers.weixin.qq.com/miniprogram/dev/reference/wxs/)：
+      * 类似`js`但是并不完全一样，有自己的语法；
+      * 每个`wxs`文件都是一个单独的模块，每个模块都有自己独立的作用域；
+      * 每个模块想要对外暴露内部的私有变量和函数，只能通过`module.exports`实现；
+      * 每个`wxs`模块都有一个内置的`module`对象；
+      * 每个`module`对象有`exports`属性，通过该属性可对外共享本模块的私有变量和函数；
+      * 在`wxml`文件中使用`wxs`模块中的方法示例：
+        ```html
+        <wxs src="./../tools.wxs" module="tools" />
+        <view> {{tools.msg}} </view>
+        <view> {{tools.bar(tools.FOO)}} </view>
+        ```
+    (3) 使用[`wxs`函数响应小程序事件](https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html)
+      * 可以在`Webview`层处理一些简单的逻辑，设置组件的`class`和样式；
+      * 可以接受到两个参数，包括事件对象和触发事件的组件所在组件的`ComponentDescriptor`对象；
+      * 视图层和逻辑层通信，`callMethod`是WXS里面调用逻辑层开发者代码的方法，而`WxsPropObserver`是逻辑层开发者代码调用WXS逻辑的机制；
+      * `WxsPropObserver`使用示例：
+        ```html
+        <wxs module="test" src="./test.wxs"></wxs>
+        <view change:prop="{{test.propObserver}}" prop="{{propValue}}" bindtouchmove="{{test.touchmove}}" class="movable"></view>
+        ```
+        `change:prop`属性前面带`change:前缀`是在`prop`属性被设置的时候触发WXS函数；值必须用`{{}}`括起来，类似监听属性；
+      * `callMethod`使用示例：
+        ```js
+        function touchstart(event, ins) {//事件对象和触发事件的组件所在组件
+          var touch = event.touches[0] || event.changedTouches[0]//touches触摸事件，当前停留在屏幕中的触摸点信息的数组；changedTouches触摸事件，当前变化的触摸点信息的数组
+          startX = touch.pageX//距离文档左边的位置
+          startY = touch.pageY//距离文档上边的位置
+          ins.callMethod('testCallmethod', {//不能传函数参数，传函数参数js获取到的为{complete: null}
+            complete: function(res) {
+              console.log('args', res)
+            }
+          })
+        }
+        ```
+      * 
+
+    ---
 5. [指南-小程序框架-视图层-简易双向绑定中的示例](https://developers.weixin.qq.com/s/8jXvobmV7vcj)   
     (1) [简易双向绑定](https://developers.weixin.qq.com/miniprogram/dev/framework/view/two-way-bindings.html)，示例：
       ```html
@@ -64,7 +108,8 @@
         },
       })
       ```
-
+    
+    ---
 6. [指南-小程序框架-视图层-动画中的示例1](https://developers.weixin.qq.com/s/oHKxDPm47h5k)   
     (1) [界面动画的常见方式](https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html#%E7%95%8C%E9%9D%A2%E5%8A%A8%E7%94%BB%E7%9A%84%E5%B8%B8%E8%A7%81%E6%96%B9%E5%BC%8F)，示例中进行渐变和动画的view：
       ```html
@@ -96,6 +141,8 @@
       }
       ```
       * `animation: name duration timing-function delay iteration-count direction;`动画参数分别为：绑定到选择器的关键帧动画名称，动画时长，动画速度，动画延时，动画播放次数，动画方向；默认值为none, 0, ease, 0, 1, normal/alternate；必须设置duration，否则没有动画效果；
+    
+    ---
 7. [指南-小程序框架-视图层-动画中的示例2](https://developers.weixin.qq.com/s/P73kJ7mi7UcA)   
     (1) [`this.animate(selector, keyframes, duration, callback)`](https://developers.weixin.qq.com/miniprogram/dev/framework/view/animation.html#%E5%85%B3%E9%94%AE%E5%B8%A7%E5%8A%A8%E7%94%BB)关键帧动画，示例：
       ```js
@@ -126,6 +173,8 @@
       * 动画完成会改变控件属性，需要用`this.clearAnimation(selector, options, callback)`来清理动画的影响
       * 原工程中使用`bind(this)`来在回调函数中使用`this`，这样不太好，改用`that`
       * 不同的动画方法像是异步执行的，不会互相阻塞
+    
+    ---
 8. [指南-小程序框架-视图层-动画中的示例3](https://developers.weixin.qq.com/s/994o8jmY7FcQ)   
     (1) 设置控件居中，需要设置父控件的css样式
       ```css
@@ -258,10 +307,9 @@
         startScrollOffset: 0,//开始滚动动画的位置
         endScrollOffset: 85,//结束滚动动画的位置
       })
-      ```
-
+      ```    
     
-      
+    ---
 9. [指南-小程序框架-视图层-动画中的示例4](https://developers.weixin.qq.com/s/cRTvdPmO7d5T)   
     (1) `js`格式化数字，前面补零
       ```js
@@ -282,7 +330,8 @@
       ```js
       var that = this //在方法内部的其他方法中使用this时，需要先保存一下this
       ```
-
+    
+    ---
 ### 开放文档笔记
 
 1. 生命周期    
