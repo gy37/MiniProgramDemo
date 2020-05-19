@@ -51,6 +51,7 @@
 6. 开发工具中`Side Bar`里面push代码会一直等待，push不成功，使用`Tool Bar`里面的`Source Control`可以
 7. [微信开放文档][documents]和[小程序开发指南][guideline]，虽然有些东西是重复的，但是建议还是都看一遍。   
   原来[小程序开发指南][guideline]是一本书，详细介绍如何进行小程序开发，按顺序应该先看一遍[微信开放文档][documents]的指南部分，然后再来详细看一遍这本书。
+8.  小程序的开发模式： `MVVM` 的开发模式（类似 `React`, `Vue`），把渲染和逻辑分离。简单来说就是不要再让 `JS` 直接操控 `DOM`，`JS` 只需要管理状态即可，然后再通过一种模板语法来描述状态和界面结构的关系即可。
 
   [comment]: #markdown添加注释语法[comment]:空格#
   [comment]: #markdown行内代码用两个``包裹
