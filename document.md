@@ -55,7 +55,9 @@
       * 刚开始只增加了按钮的点击事件，点击按钮时可以获取到想要修改属性的组件，想着可以直接设置样式，但是百度之后发现小程序中不允许在`js`中直接修改样式，需要绑定变量，通过修改变量来达到修改样式的目的；
       * 所以在`data`中增加`transform`属性，当点击按钮时修改`transform`属性的值，进而改变`wxml`中和`transform`属性绑定的控件的样式，试过之后发现可以点击按钮，但是按钮点击之后滑动，再点击就没反应了，找了一会儿发现是`wxs`文件中直接设置了控件的样式，和`js`中通过变量设置的样式重复，同时存在控件上？？？有问题导致`transform`属性不同步
       * 只通过`data`的`transform`属性来设置控件样式，使用`(3)`中的`callMethod`方法，在`wxs`中调用`js`的方法设置控件样式，而不是直接修改，从而实现按钮和滑动手势互不影响，都可以使用
-
+    (6) **滚动菜单栏贴顶** 中，`title`可以点击
+      * 事件的`target`属性是触发事件的组件，`currentTarget`属性是绑定事件的组件
+      * 内容第一个`view`中增加文字，一开始会显示，滑动之后消失？背景`image`太高，会覆盖内容，修改`image`高度，不要覆盖内容
     ---
 5. [指南-小程序框架-视图层-简易双向绑定中的示例](https://developers.weixin.qq.com/s/8jXvobmV7vcj)   
     (1) [简易双向绑定](https://developers.weixin.qq.com/miniprogram/dev/framework/view/two-way-bindings.html)，示例：
