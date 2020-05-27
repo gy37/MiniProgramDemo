@@ -1,9 +1,13 @@
 ### 开放文档中的示例
-1. [指南-起步-小程序简介中的示例](https://github.com/wechat-miniprogram/miniprogram-demo)
-    
+1. [指南-起步-小程序简介中的示例](https://github.com/wechat-miniprogram/miniprogram-demo)   
+    总的例子，用的时候在里面仔细找找，看看是怎么用的
+
     --- 
-2. [指南-小程序框架中的示例](https://developers.weixin.qq.com/s/l0gLEKmv6gZa)
-//数据绑定示例
+2. [指南-小程序框架中的示例](https://developers.weixin.qq.com/s/l0gLEKmv6gZa)   
+    (1) 简单介绍：
+      * `{{name}}`绑定js中的name变量，`js`中`name`变量改变时，此处的值会同步改变
+      * `bindtap="changeName"`绑定点击事件，点击时触发`js`中的`changeName`方法
+      * 小程序的`js`中修改变量值，不能直接修改而是通过`setData`方法
     
     --- 
 3. [指南-小程序框架-视图层-事件系统中的示例](https://developers.weixin.qq.com/s/boDQoKmu7M7G)   
