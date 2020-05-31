@@ -346,10 +346,18 @@
       ```js
       var that = this //在方法内部的其他方法中使用this时，需要先保存一下this
       ```
-    
-    ---
-### 开放文档笔记
 
+    ---
+10. [指南-小程序运行时-运行机制中的示例](https://developers.weixin.qq.com/s/ELP5uTmN7E8l)   
+    (1) `restartStrategy`配置项，指定下次冷启动后可以直接回到这个页面
+      * 默认值`homePage`，如果从这个页面推出，下次从首页冷启动
+      * `homePageAndLatestPage`，如果从这个页面推出，下次冷启动后立即加载这个页面，页面参数保持不变
+    (2) `onSaveExitState`，小程序被销毁之前，会调用这个回调函数保存一些数据，下次启动时可以通过`exitState`获取保存的数据
+      * `onSaveExitState`回调函数返回值可以包含两项：`data`保存的数据；`expireTimeStamp`保存数据的超时时间
+    ---
+    
+
+### 开放文档笔记
 1. 生命周期    
   App生命周期 `onLaunch`-`onShow`-`onHide `  
   Page生命周期 `onLoad`-`onShow`-`onReady`-`onHide`-`OnUnload`   
@@ -358,3 +366,5 @@
   `target`的`dataset`属性是当前组件上由`data-`开头的自定义属性组成的集合   
 3. 事件   
   捕获阶段位于冒泡阶段之前，且在捕获阶段中，事件到达节点的顺序与冒泡阶段恰好相反。
+4. 小程序更新机制
+  每次冷启动时，都会检查是否有更新版本，如果有更新会异步下载新版本等下次启动时更新，如果想要马上应用最新版本可以使用[wx.getUpdateManager](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/wx.getUpdateManager.html)API进行处理。
