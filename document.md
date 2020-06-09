@@ -354,7 +354,65 @@
       * `homePageAndLatestPage`，如果从这个页面推出，下次冷启动后立即加载这个页面，页面参数保持不变
     (2) `onSaveExitState`，小程序被销毁之前，会调用这个回调函数保存一些数据，下次启动时可以通过`exitState`获取保存的数据
       * `onSaveExitState`回调函数返回值可以包含两项：`data`保存的数据；`expireTimeStamp`保存数据的超时时间
+    
     ---
+11. [指南-自定义组件-组件模板和样式中的示例](https://developers.weixin.qq.com/s/1udXLnmi6KY2)   
+    (1) 在模板中引用自定义组件时，需要在模板的`json`中显示定义
+      ```json
+      {
+        "usingComponents": {
+          "my-component": "/components/component-tag-name"
+        }
+      }
+      ```
+    (2) 在自定义组件中可以提供一个`<slot>`节点，用于承载组件引用时提供的子节点
+      ```html
+      <!-- 组件模板 -->
+      <view class="wrapper">
+        <view>这里是组件的内部节点</view>
+        <slot></slot>
+      </view>
+      ```
+      ```html
+      <!-- 引用组件的页面模版 -->
+      <view>
+        <my-component>
+          <!-- 这部分内容将被放置在组件 <slot> 的位置上 -->
+          <view>这里是插入到组件slot中的内容</view> 
+        </my-component>
+      </view>
+      ```
+    (3) 默认一个`wxml`中只能有一个`slot`，如果要在组件中使用多个`slot`，需要在组件的`js`中声明
+      ```js
+      Component({
+        options: {
+          multipleSlots: true // 在组件定义时的选项中启用多slot支持
+        },
+        properties: { /* ... */ },
+        methods: { /* ... */ }
+      })
+      ```
+    (4) 组件中使用多个`slot`，要以不同的`name`来区分
+      ```html
+      <!-- 组件模板 -->
+      <view class="wrapper">
+        <slot name="before"></slot>
+        <view>这里是组件的内部细节</view>
+        <slot name="after"></slot>
+      </view>
+      ```
+      ```html
+      <!-- 引用组件的页面模板 -->
+      <view>
+        <component-tag-name>
+          <!-- 这部分内容将被放置在组件 <slot name="before"> 的位置上 -->
+          <view slot="before">这里是插入到组件slot name="before"中的内容</view>
+          <!-- 这部分内容将被放置在组件 <slot name="after"> 的位置上 -->
+          <view slot="after">这里是插入到组件slot name="after"中的内容</view>
+        </component-tag-name>
+      </view>
+      ```
+    (5) 组件样式
     
 
 ### 开放文档笔记
