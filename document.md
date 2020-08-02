@@ -356,7 +356,7 @@
       * `onSaveExitState`回调函数返回值可以包含两项：`data`保存的数据；`expireTimeStamp`保存数据的超时时间
     
     ---
-11. [指南-自定义组件-组件模板和样式中的示例](https://developers.weixin.qq.com/s/1udXLnmi6KY2)   
+11. [指南-自定义组件-组件模板和样式中的示例1](https://developers.weixin.qq.com/s/1udXLnmi6KY2)   
     (1) 在模板中引用自定义组件时，需要在模板的`json`中显示定义
       ```json
       {
@@ -412,7 +412,71 @@
         </component-tag-name>
       </view>
       ```
-    (5) 组件样式
+
+    ---
+12. [指南-自定义组件-组件模板和样式中的示例2](https://developers.weixin.qq.com/s/jAgvwKm16bZD)   
+    (1) 组件样式，在组件中不能使用`id`选择器，属性选择器和标签选择器；子元素选择器只能用于`view`组件及其子节点之间；推荐使用`class`选择器   
+      ```css
+      #a { } /* 在组件中不能使用 */
+      [a] { } /* 在组件中不能使用 */
+      button { } /* 在组件中不能使用 */
+      .a > .b { } /* 除非 .a 是 view 组件节点，否则不一定会生效 */
+      ```
+    (2) 组件可以指定所在节点的默认样式，使用`:host`选择器
+      ```css
+      /* 组件 custom-component.wxss */
+      :host {
+        color: yellow;
+      }
+      ```
+
+    ---
+13. [指南-自定义组件-组件模板和样式中的示例3](https://developers.weixin.qq.com/s/xPQhJcm37e7h)   
+    (1) 组件样式隔离，通过在组件的`js`文件中设置`options`的隔离选项`styleIsolation`来指定   
+      ```js
+      Component({
+        options: {
+          styleIsolation: 'isolated'
+        }
+      })
+      ```
+    (2) `js`文件中设置`styleIsolation`选项的值（>2.6.5）：   
+      * `isolated`表示启用样式隔离，只对组件内的元素有影响（默认值）
+      * `apply-shared`表示页面的样式将会影响自定义组件，但组件中的样式不会影响页面
+      * `shared`表示页面的样式将会影响自定义组件，组件中的样式也会影响页面，和设置了`apply-shared`和`shared`的自定义组件
+
+    (3) `Component`构造器用于构造页面时，页面的`styleIsolation`默认值为`shared`，其他可选值：
+      * `page-isolated`表示这个页面禁用`app.wxss`中的样式，同时页面的样式不会影响其他自定义组件
+      * `page-apply-shared`表示这个页面禁用`app.wxss`中的样式，同时页面的样式不会影响其他自定义组件，但设置为`shared`的自定义组件会影响该页面
+      * `page-shared`表示这个页面禁用`app.wxss`中的样式，同时页面的样式会影响到其他设置为`appley-shared`和`shared`的自定义组件，同时也会受到设置为`shared`的自定义组件的影响
+
+    (4) 修改`page-isolated`为`page-apply-shared`
+      * 页面中的文字变为红色？*page-apply-shared<shared* 
+      * `apply-shared`组件中的文字变为蓝色？*apply-shared>(page-apply-shared,shared)*
+      * `shared`组件中的文字变为红色？*shared>page-apply-shared*
+
+    (5) 修改`page-isolated`为`page-shared`
+      * 页面中的文字变为红色？*page-shared<shared* 
+      * `apply-shared`组件中的文字变为蓝色？*apply_shared>page-shared*
+      * `shared`组件中的文字变为红色？*shared>page-shareds*
+      
+    (6) `page-shared`页面样式会影响到`shared`组件的样式，同时也会受到设置为`shared`的自定义组件的影响，那么那个优先级高呢？
+      * `isolated`>`apply-shared`>`shared`*组件之间*
+      * `shared`>`page-isolated`*组件和页面之间*
+      * `shared`>`page-apply-shared`*组件和页面之间*
+      * `shared`>`page-shared`*组件和页面之间*
+
+    (7) `json`文件中设置`styleIsolation`的值（>2.10.1）:   
+
+    ---
+14. [指南-自定义组件-组件模板和样式中的示例4](https://developers.weixin.qq.com/s/VkTd7Fm37ggl)   
+    (1) 从2.10.1开始，可以在页面或者自定义组件的`json`文件中配置`styleIsolation`属性，不需要再`js`文件中单独配置   
+    (2) 从2.2.3开始支持`addGlobalClass`选项，在`js`中设置`addGlobalClass: true`，等价于设置`styleIsolation: apply-shared`   
+    
+    ---
+15. [指南-自定义组件-组件模板和样式中的示例5](https://developers.weixin.qq.com/s/rbgNNKmE6bZK)   
+    (1) 外部样式类
+    
     
 
 ### 开放文档笔记
