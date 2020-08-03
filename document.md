@@ -475,8 +475,48 @@
     
     ---
 15. [指南-自定义组件-组件模板和样式中的示例5](https://developers.weixin.qq.com/s/rbgNNKmE6bZK)   
-    (1) 外部样式类
+    (1) 外部样式类,组件可以接受外部传入的样式类。在组件中用`externalClasses`定义若干个外部样式类。
+      ```js
+      /* 组件 custom-component.js */
+      Component({
+        externalClasses: ['my-class']
+      })
+      ```
+      ```html
+      <!-- 组件 custom-component.wxml -->
+      <custom-component class="my-class">这段文本的颜色由组件外的 class 决定</custom-component>
+      ```
+      ```html
+      <!-- 页面的 WXML -->
+      <custom-component my-class="red-text" />
+      ```
+      ```css
+      /* 页面的WXSS */
+      .red-text {
+        color: red;
+      }
+      ```
+
+    ---
+16. [指南-自定义组件-组件模板和样式中的示例6](https://developers.weixin.qq.com/s/AlV9fEmF7Dh8)   
+    (1) 虚拟化组件节点，默认情况下组件本身的节点是普通节点，有时候不希望设置组件本身的节点，可以使用虚拟化节点
+      ```js
+      Component({
+        options: {
+          virtualHost: true
+        },
+        properties: {
+          style: { // 定义 style 属性可以拿到 style 属性上设置的值
+            type: String,
+          }
+        },
+        externalClass: ['class'], // 可以将 class 设为 externalClass
+      })
+      ```
     
+    ---
+17. [指南-自定义组件-Component构造器]()
+
     
 
 ### 开放文档笔记
@@ -490,3 +530,50 @@
   捕获阶段位于冒泡阶段之前，且在捕获阶段中，事件到达节点的顺序与冒泡阶段恰好相反。
 4. 小程序更新机制
   每次冷启动时，都会检查是否有更新版本，如果有更新会异步下载新版本等下次启动时更新，如果想要马上应用最新版本可以使用[wx.getUpdateManager](https://developers.weixin.qq.com/miniprogram/dev/api/base/update/wx.getUpdateManager.html)API进行处理。
+5. Component构造器
+    ```js
+    Component({
+      behaviors: [],
+      properties: {
+        myProperty: { // 属性名
+          type: String,
+          value: ''
+        },
+        myProperty2: String // 简化的定义方式
+      },
+      data: {}, // 私有数据，可用于模板渲染
+      lifetimes: {
+        // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
+        attached: function () { },
+        moved: function () { },
+        detached: function () { },
+      },
+      // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
+      attached: function () { }, // 此处attached的声明会被lifetimes字段中的声明覆盖
+      ready: function() { },
+      pageLifetimes: {
+        // 组件所在页面的生命周期函数
+        show: function () { },
+        hide: function () { },
+        resize: function () { },
+      },
+      methods: {
+        onMyButtonTap: function(){
+          this.setData({
+            // 更新属性和数据的方法与更新页面数据的方法类似
+          })
+        },
+        // 内部方法建议以下划线开头
+        _myPrivateMethod: function(){
+          // 这里将 data.A[0].B 设为 'myPrivateData'
+          this.setData({
+            'A[0].B': 'myPrivateData'
+          })
+        },
+        _propertyChange: function(newVal, oldVal) {
+
+        }
+      }
+    })
+    ```
+  
