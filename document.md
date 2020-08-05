@@ -515,7 +515,54 @@
       ```
     
     ---
-17. [指南-自定义组件-Component构造器]()
+17. [指南-自定义组件-组件间通信与事件示例1](https://developers.weixin.qq.com/s/DFfYSKmI6vZD)   
+    (1) 自定义组件触发事件时，需要使用`triggerEvent`方法，指定事件名、detail对象和事件选项   
+    ```html
+    <!-- 在自定义组件中 -->
+    <button bindtap="onTap">点击这个按钮将触发“myevent”事件</button>
+    ```
+    ```js
+    Component({
+      properties: {},
+      methods: {
+        onTap: function(){
+          var myEventDetail = {} // detail对象，提供给事件监听函数
+          var myEventOption = {} // 触发事件的选项
+          this.triggerEvent('myevent', myEventDetail, myEventOption)
+        }
+      }
+    })
+    ```
+
+    ---
+18. [指南-自定义组件-组件间通信与事件示例2](https://developers.weixin.qq.com/s/UGfljKm66zZ1)   
+    (1) 自定义组件触发事件时，有事件选项。包括`bubbles`是否冒泡；`comoposed`是否可以穿越组件边界，到达其他组件内部；`capturePhase`是否有捕获阶段
+    ```html
+    // 页面 page.wxml
+    <another-component bindcustomevent="pageEventListener1">
+      <my-component bindcustomevent="pageEventListener2"></my-component>
+    </another-component>
+    // 组件 another-component.wxml
+    <view bindcustomevent="anotherEventListener">
+      <slot />
+    </view>
+    // 组件 my-component.wxml
+    <view bindcustomevent="myEventListener">
+      <slot />
+    </view>
+    ```
+    ```js
+    // 组件 my-component.js
+    Component({
+      methods: {
+        onTap: function(){
+          this.triggerEvent('customevent', {}) // 只会触发 pageEventListener2
+          this.triggerEvent('customevent', {}, { bubbles: true }) // 会依次触发 pageEventListener2 、 pageEventListener1
+          this.triggerEvent('customevent', {}, { bubbles: true, composed: true }) // 会依次触发 pageEventListener2 、 anotherEventListener 、 pageEventListener1
+        }
+      }
+    })
+    ```
 
     
 
@@ -576,4 +623,27 @@
       }
     })
     ```
+6. 组件间通信和事件   
+    (1) 数据绑定，用于父组件向自组件指定属性设置数据   
+    (2) 事件，用于子组件向父组件传递数据   
+    (3) 父组件可以通过`selectComponent`方法获取子组件示例对象，可以调用子组件中的任意数据和方法   
+    (4) 如果需要自定义`selectComponent`返回的数据，可使用内置的`behavior:wx://component-export`
+    ```js
+    // 自定义组件 my-component 内部
+    Component({
+      behaviors: ['wx://component-export'],
+      export() {
+        return { myField: 'myValue' }
+      }
+    })
+    ```
+    ```html
+    <!-- 使用自定义组件时 -->
+    <my-component id="the-id" />
+    ```
+    ```js
+    // 父组件调用
+    const child = this.selectComponent('#the-id') // 等于 { myField: 'myValue' }
+    ```
+
   
