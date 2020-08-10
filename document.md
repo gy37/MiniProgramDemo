@@ -563,6 +563,18 @@
       }
     })
     ```
+    ---
+19. [指南-自定义组件-behaviors示例1](https://developers.weixin.qq.com/s/Yq4RqCm87thO)   
+20. [指南-自定义组件-behaviors示例2](https://developers.weixin.qq.com/s/CI5omDmT7khB)   
+    (1) `behaviors`用于组件间代码共享的特性，类似于`mixins`   
+    (2) `behaviors`和组件同名字段的覆盖和组合规则：   
+      * 同名的属性和方法，组件会覆盖`behaviors`，后面的会覆盖前面的，父类会覆盖子类
+      * 同名的数据字段，对象类型会合并，其他数据覆盖规则为组件 > `父 behavior` > `子 behavior` 、 `靠后的 behavior` > `靠前的 behavior`
+      * 生命周期函数不会互相覆盖，执行顺序组件 < `父 behavior` < `子 behavior` 、 `靠后的 behavior` < `靠前的 behavior`
+    ---
+
+
+
 
     
 
@@ -645,5 +657,53 @@
     // 父组件调用
     const child = this.selectComponent('#the-id') // 等于 { myField: 'myValue' }
     ```
+7. 组件生命周期   
+    ```js
+    Component({
+      lifetimes: {
+        attached: function() {
+          // 在组件实例进入页面节点树时执行
+        },
+        detached: function() {
+          // 在组件实例被从页面节点树移除时执行
+        },
+      },
+      // 以下是旧式的定义方式，可以保持对 <2.2.3 版本基础库的兼容
+      attached: function() {
+        // 在组件实例进入页面节点树时执行
+      },
+      detached: function() {
+        // 在组件实例被从页面节点树移除时执行
+      },
+      // ...
+    })
+    ```
+    (1) 组件实例刚被创建好时，触发`created`生命周期函数。   
+    (2) 组件完全初始化完毕，进入页面节点树后，`attached`生命周期函数被触发。   
+    (3) 当组件离开页面节点树后，`detached`生命周期函数被触发。   
+8. 组件所在页面生命周期   
+    ```js
+    Component({
+      pageLifetimes: {
+        show: function() {
+          // 页面被展示
+        },
+        hide: function() {
+          // 页面被隐藏
+        },
+        resize: function(size) {
+          // 页面尺寸变化
+        }
+      }
+    })
+    ```
+9. 内置Behaviors   
+  引用内置Behavior获取内置组件的一些行为：
+    ```js
+    Component({
+      behaviors: ['wx://from-field']
+    })
+    ```
+  
 
   
