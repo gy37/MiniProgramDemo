@@ -572,7 +572,34 @@
       * 同名的数据字段，对象类型会合并，其他数据覆盖规则为组件 > `父 behavior` > `子 behavior` 、 `靠后的 behavior` > `靠前的 behavior`
       * 生命周期函数不会互相覆盖，执行顺序组件 < `父 behavior` < `子 behavior` 、 `靠后的 behavior` < `靠前的 behavior`
     ---
-
+21. [指南-自定义组件-组件间关系示例1](https://developers.weixin.qq.com/s/0kfvzKm56NZy)   
+22. [指南-自定义组件-组件间关系示例2](https://developers.weixin.qq.com/s/LFEVaqmh6zYU)   
+23. [指南-自定义组件-数据监听器示例1](https://developers.weixin.qq.com/s/FUZF9ams7g6N)   
+24. [指南-自定义组件-纯数据字段示例1](https://developers.weixin.qq.com/s/DKWiBXmb7jaB)   
+25. [指南-自定义组件-抽象节点示例1](https://developers.weixin.qq.com/s/ztPzoImW7E7P)   
+    (1) 抽象节点的wxml:
+    ```html
+    <!-- selectable-group.wxml -->
+    <view wx:for="{{labels}}">
+      <label>
+        <selectable disabled="{{false}}"></selectable>
+        {{item}}
+      </label>
+    </view>
+    ```
+    (2) 抽象节点声明:
+    ```js
+    {
+      "componentGenerics": {
+        "selectable": true
+      }
+    }
+    ```
+    (3) 使用抽象节点:
+    ```html
+    <selectable-group generic:selectable="custom-radio" />
+    <selectable-group generic:selectable="custom-checkbox" />
+    ```
 
 
 
