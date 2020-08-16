@@ -600,7 +600,8 @@
     <selectable-group generic:selectable="custom-radio" />
     <selectable-group generic:selectable="custom-checkbox" />
     ```
-
+26. [指南-自定义组件-自定义组件扩展示例1](https://developers.weixin.qq.com/s/STePQRmH7Q5H)   
+27. [指南-自定义组件-自定义组件扩展示例2](https://developers.weixin.qq.com/s/WaqPbxmN7E1j)   
 
 
     
