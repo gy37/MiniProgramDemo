@@ -602,6 +602,8 @@
     ```
 26. [指南-自定义组件-自定义组件扩展示例1](https://developers.weixin.qq.com/s/STePQRmH7Q5H)   
 27. [指南-自定义组件-自定义组件扩展示例2](https://developers.weixin.qq.com/s/WaqPbxmN7E1j)   
+28. [指南-硬件能力-蓝牙示例1](https://developers.weixin.qq.com/s/OF4Y9Gme6rZ4)   
+    ArrayBuffer和DataView，[js中的数据操作](https://zhuanlan.zhihu.com/p/97768916)
 
 
     
