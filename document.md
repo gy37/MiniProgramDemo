@@ -734,6 +734,6 @@
       behaviors: ['wx://from-field']
     })
     ```
-  
+10. git设置ssh后需要将remote url设置为git开头的地址，https开头的只能使用用户名和密码登陆  
 
   
