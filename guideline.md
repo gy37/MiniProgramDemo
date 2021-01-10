@@ -13,7 +13,7 @@
 9. wx:key指定列表中项目的唯一标示，渲染时会动态更新而不是重新创建，提交渲染效率。可以使用两种方式，1字符串，代表item的某个property，该property的值需要为列表中的唯一字符串；2关键字*this，代表item本身，该item需要是唯一的字符串或者数字
 10. 使用template定义模版，然后在不同的地方调用，使用name属性作为模版的名字。引用时使用is属性，声明需要使用的模版，然后将模版所需要的data传入
 11. import之后可以使用引用文件中的template，只能使用引用文件中的template，不能递归引用；include可以将目标文件中出来template和wxs外的整个代码引入，相当于是拷贝到include的位置
-12. 所有wxml标签都支持的属性：
+12. 所有wxml标签都支持的属性：（*markdown表格前面需要一个空行* ）
 
     |属性名|类型|描述|注释|
     |----|----|----|----|
@@ -22,7 +22,6 @@
     |style|String|组件的内联样式|可以动态设置的内联样式|
     |hidden|Boolean|组件是否显示|所有组件默认显示|
     |data-*|Any|自定义属性|组件的属性|
-    |bind*/catch*|EventHandler|组件的事件|触发事件时，会发送给事件处理函数|
-    *markdown表格前面需要一个空行*   
+    |bind*/catch*|EventHandler|组件的事件|触发事件时，会发送给事件处理函数|  
     
 二、WXSS样式
