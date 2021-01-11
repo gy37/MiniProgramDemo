@@ -25,3 +25,22 @@
     |bind*/catch*|EventHandler|组件的事件|触发事件时，会发送给事件处理函数|  
     
 二、WXSS样式
+1. rpx单位和px的换算关系，1rpx=1px
+2. 样式引用，`@import './test_0.wxss'`
+3. 元素选择器
+
+    |类型|选择器|样例|
+    |----|----|----|
+    |类选择器|.class|.intro|
+    |id选择器|#id|#firstname|
+    |元素选择器|element|view checkbox|
+    |伪元素选择器|::after|view::after|
+    |伪元素选择器|::before|view::before|
+
+    元素选择器 优先级1   
+    类选择器 优先级10   
+    id选择器 优先级100   
+    内联样式 优先级1000   
+    !important 优先级∞   
+
+三、JavaScript脚本
