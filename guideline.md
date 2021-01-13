@@ -52,4 +52,37 @@
 2. 渲染层和数据相关；逻辑层负责产生、处理数据；逻辑层通过page实例的setData方法传递数据到渲染层；
 3. 渲染层的界面使用webview进行渲染；逻辑层采用jscore线程运行js脚本；两个线程的通信会经过微信客户端做中转
 4. 小程序中的wxml也是一个Dom树的结构，也可以通过js对象来表达Dom树，当数据变化时，会先比较js对象，把js对象前后差异的部分应用到dom树上，达到更新页面的目的。
-5. 
+
+五、程序与页面
+1. 小程序生命周期
+onLaunch: 初始化完成时，会触发
+onShow: 小程序启动，或从后台进入前台显示时，会触发
+onHide: 小程序从前台进入后台，会触发
+onError: 小程序发生脚本错误，或者发生API调用失败时，会触发
+2. 所有js都在同一个jscore线程中，所以使用定时器时要注意，再跳转其他页面时要自己清理
+3. 页面的生命周期
+onLoad
+onReady
+onShow
+onHide
+onUnload
+4. 页面的用户行为
+onPullDownRefresh：下拉刷新
+onReachBottom：上拉触底
+onPageScroll：页面滚动
+onShareAppMessage：用户转发
+5. 页面的数据
+通过this.setData把数据传递给渲染层，更新页面；
+setData异步调用，可以设置回调；
+每次只设置需要改变的最小单位数据；
+直接修改page实例的data属性，不调用setData方法是无法改变页面状态的，还会导致数据不一致；（类似react中的setState）
+6. 页面跳转和路由
+小程序页面以页面栈的形式存在，最大10层；
+wx.navigateTo({url: 'pageD'})相当前页面栈中推入一个页面；
+wx.navigateBack()推出当前页面栈最顶层的页面；
+wx.redirectTo({url: 'pageE'})替换当前页面变成pageE；
+wx.switchTab({url: 'pageF'})切换tab，原来的页面栈会被清空，除了已被声明为Tabbar的页面
+wx.reLaunch({url: 'pageH'})重启小程序，并打开指定页面
+
+六、组件
+1. 
