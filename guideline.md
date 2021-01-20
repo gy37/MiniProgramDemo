@@ -85,4 +85,43 @@ wx.switchTab({url: 'pageF'})切换tab，原来的页面栈会被清空，除了�
 wx.reLaunch({url: 'pageH'})重启小程序，并打开指定页面
 
 六、组件
-1. 
+1. 组件类似控件，页面的基础，一个个的组件拼接组合成页面
+2. 所有组件公共属性   
+
+    |属性名|类型|描述|其他说明|
+    |---|---|---|---|
+    |id|String|组件的唯一标示|整个页面唯一|
+    |calss|String|组件的样式类|在wxss中定义的样式类|
+    |style|String|组件的内联样式|可以通过数据绑定进行动态设置的内联样式|
+    |hidden|Boolean|组件是否显示|默认显示|
+    |data-*|Any|自定义属性|组件上触发的事件，会发送给事件处理函数|
+    |bind/catch|EventHandler|事件|事件处理|
+
+七、微信API
+1. wx.on*开头的方法用来监听事件发生的API接口，可接受一个callback函数作为参数。
+2. 如未特殊约定，多数API接口为异步接口，都接受一个object作为参数。
+3. API的object参数一般有success，fail，complete三个回调来接收接口调用结果。
+4. wx.get*开头的API是获取宿主环境数据的接口。
+5. wx.set*开头的API是写入数据到宿主环境的接口。
+
+八、事件
+1. 把用户在渲染层的行为反馈，以及组件的部分状态反馈，抽象为渲染层传递给逻辑层的事件。
+2. 事件类型：touchstart, touchmove, touchcancel, touchend; tap, longpress, long tap; transitionend, animationstart, animationiteration, animationend
+3. 事件对象的属性
+
+    |属性|类型|说明|
+    |---|---|---|
+    |type|String|事件类型|
+    |timeStamp|Integer|页面打开到触发事件经过的毫秒数|
+    |target|Object|触发事件的组件的一些属性值集合|
+    |currentTarget|Object|当前组件的一些属性值集合|
+    |detail|Object|额外的信息|
+    |touches|Array|触摸事件，当前停留在屏幕中的触摸点信息的数组|
+    |changedTouches|Array|触摸事件，当前变化的触摸点信息的数组|
+target为触发该事件的源头组件，currentTarget为当前事件所绑定的组件
+4. capture-bind*捕获阶段，从外到内，从父视图到子视图；
+bind*冒泡阶段，从内到外，从子视图到父视图；
+capture-catch*事件绑定会阻止冒泡事件向上冒泡
+
+九、兼容
+
