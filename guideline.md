@@ -118,7 +118,7 @@ wx.reLaunch({url: 'pageH'})重启小程序，并打开指定页面
     |detail|Object|额外的信息|
     |touches|Array|触摸事件，当前停留在屏幕中的触摸点信息的数组|
     |changedTouches|Array|触摸事件，当前变化的触摸点信息的数组|
-target为触发该事件的源头组件，currentTarget为当前事件所绑定的组件
+    target为触发该事件的源头组件，currentTarget为当前事件所绑定的组件
 4. capture-bind*捕获阶段，从外到内，从父视图到子视图；
 bind*冒泡阶段，从内到外，从子视图到父视图；
 capture-catch*事件绑定会阻止冒泡事件向上冒泡
