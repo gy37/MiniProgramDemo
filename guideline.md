@@ -134,4 +134,38 @@ capture-catch*事件绑定会阻止冒泡事件向上冒泡
 3. 梳理每个页面的数据部分，完成JS中的逻辑
 
 十一、 Flex布局
+1. 传统网页开发，使用的是盒模型，通过display:inline|block|inline-block, position, float来实现布局。
+2. 使用flex布局的元素，简称为容器，使用container表示容器的类名；容器内的元素简称为项目，用item表示项目的类名。
+3. flex不但是一个属性，还包含了一套新的属性集，属性集包括设置容器盒设置项目两部分。
+4. 容器的属性：
+    ```
+    display: flex;
+    flex-direction: row|row-reverse|column|column-reverse 设置坐标轴来设置项目排列方向
+    flex-wrap: nowrap|wrap|wrap-reverse 设置项目多行排列及多行时的换行方向
+    justify-content: flex-start|flex-end|center|space-between|space-around|space-evenly 设置项目在主轴方向上的对齐方式，及分配项目之间盒周围多余的空间
+    align-items: stretch|center|flex-end|baseline|flex-start 项目在交叉轴方向上的对齐方式
+    align-content: stretch|flex-start|center|flex-end|space-between|space-around|space-evenly 多行排列时，设置行在交叉轴方向上的对齐方式，及分配周围多余的空间
+    ```
+5. 项目的属性：
+    ```
+    order: 0|<integer> 设置项目沿主轴方向上的排列顺序，数值越小排列越靠前
+    flex-shrink: 1|<number> 当项目在主轴方向溢出时，通过设置收缩因子来压缩项目适应容器
+    flex-grow: 0|<number> 当项目在主轴方向上还有剩余空间时，通过设置项目扩张因子进行剩余空间的分配
+    flex-basis: auto|<length> flex-basis和width或者height属性优先级
+    flex: none|auto|@flex-grow @flex-shrink @flex-basis 是简写形式，none表示0 0 auto，auto表示1 1 auto
+    align-self: auto|flex-start|flex-end|center|baseline|stretch 设置项目在行中交叉轴方向上的对齐方式，用于覆盖容器的align-items
+    ```
+6. 默认水平方向是主轴，垂直方向是交叉轴
+7. 项目在主轴上排列，排满之后在交叉轴方向换行，交叉轴垂直于主轴
+8. justify-content: flex-start|flex-end|center项目之间不留空隙，space-between|space-around|space-evenly项目之间又间距
+9. align-items: stretch拉伸项目，center|flex-end|baseline|flex-start项目对齐的位置
+10. align-content: stretch拉伸各行项目至填满交叉轴，flex-start|flex-end|center行间不留空隙，space-between|space-around|space-evenly行间又间距
+11. flex-shrink项目收缩因子，项目总和超出容器宽度时，总权重=项目宽度* 收缩因子 的和；项目实际宽度=项目宽度-溢出宽度* 项目宽度* 收缩因子/总权重；当项目的收缩因子相加小于1时，参与计算的溢出空间=溢出空间* 收缩因子的和/1
+12. flew-grow项目扩张因子，项目实际宽度=项目宽度+剩余空间*扩张因子/扩张因子之和；当项目的扩张因子相加小于1时，剩余空间按除以1进行分配，项目实际宽度=项目宽度+剩余空间 *扩张因子
+13. flex-basis优先级高于width和height，有主轴方向决定是替换width还是height；当其中一个属性为auto时，非auto属性的优先级更高
+14. align-self默认属性值为auto，继承容器的align-items值，当容器没有设置align-items时，属性值为stretch
 
+[小程序文档中的flex讲解](https://developers.weixin.qq.com/ebook?action=get_post_info&docid=00080e799303986b0086e605f5680a)
+
+十二、界面常见的交互反馈
+1. 
