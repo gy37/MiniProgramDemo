@@ -167,5 +167,55 @@ capture-catch*事件绑定会阻止冒泡事件向上冒泡
 
 [小程序文档中的flex讲解](https://developers.weixin.qq.com/ebook?action=get_post_info&docid=00080e799303986b0086e605f5680a)
 
-十二、界面常见的交互反馈
+十二、界面常见的交互反馈 
+
+十三、发起HTTPS网络通信   
+1. 网络请求示例
+    ```
+    wx.request({
+        url: 'https://test.com/getinfo?id=1&version=1.0.0',
+        data: {id: 1, version: '1.0.0'},
+        success: function(res) {
+            console.log(res);
+        }
+    })
+    ```
+2. 常用网络请求格式
+    ```     
+    requestTest: function () {
+      if (this.data.hasClick) {
+        return;
+      }
+      this.setData({
+        hasClick: true
+      });
+      wx.showLoading({
+        title: 'Loading',
+      })
+      wx.request({
+        url: 'https://test.com/getinfo',
+        method: 'POST',
+        header: {'content-type': 'application/json'},
+        data: {},
+        success: function (res) {
+          if (res.statusCode === 200) {
+            console.log(res.data);
+          }
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '系统错误',
+          })
+        },
+        complete: function (res) {
+          wx.hideLoading();
+          this.setData({
+            hasClick: false
+          });
+        }
+      })
+    }
+    ```
+
+十四、微信登录
 1. 
