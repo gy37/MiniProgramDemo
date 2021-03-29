@@ -217,5 +217,14 @@ capture-catch*事件绑定会阻止冒泡事件向上冒泡
     }
     ```
 
-十四、微信登录
+十四、微信登录   
+
+十五、本地数据缓存
+1. wx.getStorage/wx.getStorageSync读取本地缓存；wx.setStorage/wx.setStorageSync写数据到缓存
+
+十六、设备能力
+1. wx.scanCode调用微信扫一扫功能
+2. wx.getNetworkType获取网络状态；wx.onNetworkStatusChange监听网络状态变化
+
+十七、协同工作
 1. 
